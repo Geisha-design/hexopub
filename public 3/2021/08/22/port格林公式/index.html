@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.9.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="众所周知，格林公式作为KO与路径无关的第二类曲线积分的杀招，是秀的。但至于为什么适用于路径无关的情况、路径无关的判据为什么是  ，为什么线积分能够等效成一个二重积分。很多人一脸黑人问号。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="格林公式">
+<meta property="og:url" content="http://example.com/2021/08/22/port%E6%A0%BC%E6%9E%97%E5%85%AC%E5%BC%8F/index.html">
+<meta property="og:site_name" content="齐雨争 &#x2F; Chingmy">
+<meta property="og:description" content="众所周知，格林公式作为KO与路径无关的第二类曲线积分的杀招，是秀的。但至于为什么适用于路径无关的情况、路径无关的判据为什么是  ，为什么线积分能够等效成一个二重积分。很多人一脸黑人问号。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=%5Cfrac+%7B%5Cpartial+Q%7D%7B%5Cpartial+X%7D=%5Cfrac+%7B%5Cpartial+P%7D%7B%5Cpartial+Y%7D++">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-9f93f53a70b68691567ff3aee9f3eb98_1440w.jpg">
+<meta property="og:image" content="https://pic3.zhimg.com/80/v2-077e73d374f5f2bcac1f35003a79267a_1440w.jpg">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=+F=%5Ccfrac%7BGMm%7D%7Br%5E2%7D+">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=r%5E2=x%5E2+y%5E2+">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=F=%5Ccfrac%7BGMm%7D%7Bx%5E2+y%5E2%7D">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=+Fsin%5Ctheta=F_%7BX%7D+">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=Fcos%5Ctheta=F_%7BY%7D">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=W_%7BL%7D=%5Cint_%7BL%7DFsin%5Ctheta+dx+Fcos%5Ctheta+dy">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=W_%7BL%7D=%5Cint_%7BL%7DPdx+Qdy">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=P=Fsin%5Ctheta=%5Ccfrac%7BGMmx%7D%7B%7B%5Cleft(+x%5E2+y%5E2+%5Cright)%7D%5E%7B%5Cfrac%7B3%7D%7B2%7D%7D%7D">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=Q=Fcos%5Ctheta=%5Ccfrac%7BGMmy%7D%7B%7B%5Cleft(+x%5E2+y%5E2+%5Cright)%7D%5E%7B%5Cfrac%7B3%7D%7B2%7D%7D%7D">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=sin%5Ctheta=%5Cfrac%7Bx%7D%7B%5Csqrt%7Bx%5E2+y%5E2%7D%7D">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=cos%5Ctheta=%5Cfrac%7By%7D%7B%5Csqrt%7Bx%5E2+y%5E2%7D%7D">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=%5Cfrac+%7B%5Cpartial+P%7D%7B%5Cpartial+Y%7D++">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=%5Cfrac+%7B%5Cpartial+Q%7D%7B%5Cpartial+X%7D">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-d33207ca31f956093be6a87a4a5ab300_1440w.jpg">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-bdf0fc027e36156f6c69215dd8639d90_1440w.jpg">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-18dc2d9fbb7b4c3673ff15961a28981f_1440w.jpg">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-9de83db33fce010c7aa4b0d1554600f3_1440w.png">
+<meta property="og:image" content="https://pic3.zhimg.com/80/v2-b1ca3718675bd3757a053f6029edf152_1440w.jpg">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-f6abecdc4f4e20502687c41fc194c5d4_1440w.jpg">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-5cd78bb4c8bcd4b109537287251367e8_1440w.jpg">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=W_%7BL_1%7D=%5Cint_%7Ba_1%7D%5E%7Ba_2%7DP(x,b_1)dx">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=W_%7BL_2%7D=%5Cint_%7Bb_1%7D%5E%7Bb_2%7DQ(a_2,y)dy">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=W_%7BL_3%7D=%5Cint_%7Ba_2%7D%5E%7Ba_1%7DP(x,b_2)dx">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=W_%7BL_4%7D=%5Cint_%7Bb_2%7D%5E%7Bb_1%7DQ(a_1,y)dy">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=W=%5Cint_%7Ba_1%7D%5E%7Ba_2%7D%5BP(x,b_1)-P(x,b_2)%5Ddx+%5Cint_%7Bb_1%7D%5E%7Bb_2%7D%5BQ(a_2,y)-Q(a_1,y)%5Ddy">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=%5Clim_%7Bx%5Cto%7Bx_0%7D%7D+%5Cfrac%7Bf(x,y_0)-f(x_0,y_0)%7D+%7Bx-x_%7B0%7D%7D=f%27(x_%7B0%7D,y_%7B0%7D)">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=b1-b2%5Crightarrow+%7B0%7D">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=P(x,b_1)-P(x,b_2)=%5Cint_%7Bb_2%7D%5E%7Bb_1%7DP%27_y(x,y)dy=%5Cint_%7Bb_2%7D%5E%7Bb_1%7D%7B%5Cfrac+%7B%5Cpartial+P%7D%7B%5Cpartial+Y%7D%7Ddy">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=Q(a_2,y)-Q(a_1,y)=%5Cint_%7Ba_1%7D%5E%7Ba_2%7DQ%27_x(x,y)dy=%5Cint_%7Ba_1%7D%5E%7Ba_2%7D%7B%5Cfrac+%7B%5Cpartial+Q%7D%7B%5Cpartial+X%7D%7Ddx">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=W=%5Cint_%7Ba_1%7D%5E%7Ba_2%7D%5Cint_%7Bb_2%7D%5E%7Bb_1%7D%5Cfrac+%7B%5Cpartial+P%7D%7B%5Cpartial+Y%7Ddxdy+%5Cint_%7Ba_1%7D%5E%7Ba_2%7D%5Cint_%7Bb_1%7D%5E%7Bb_2%7D%5Cfrac+%7B%5Cpartial+Q%7D%7B%5Cpartial+X%7Ddxdy">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=W=%5Cint_%7Ba_1%7D%5E%7Ba_2%7D%5Cint_%7Bb_1%7D%5E%7Bb_2%7D%5B%5Cfrac+%7B%5Cpartial+Q%7D%7B%5Cpartial+X%7D-%5Cfrac+%7B%5Cpartial+P%7D%7B%5Cpartial+Y%7D%5Ddxdy=%5Ciint_%7BD_1%7D%5B%5Cfrac+%7B%5Cpartial+Q%7D%7B%5Cpartial+X%7D-%5Cfrac+%7B%5Cpartial+P%7D%7B%5Cpartial+Y%7D%5Dd%5Csigma">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=%5Coint_%7BL%7DPdx+Qdy=%5Ciint_D%5B%5Cfrac+%7B%5Cpartial+Q%7D%7B%5Cpartial+X%7D-%5Cfrac+%7B%5Cpartial+P%7D%7B%5Cpartial+Y%7D%5Dd%5Csigma">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=%5Cfrac+%7B%5Cpartial+Q%7D%7B%5Cpartial+X%7D=%5Cfrac+%7B%5Cpartial+P%7D%7B%5Cpartial+Y%7D+">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=%5Cfrac+%7B%5Cpartial+Q%7D%7B%5Cpartial+X%7D=%5Cfrac+%7B%5Cpartial+P%7D%7B%5Cpartial+Y%7D+">
+<meta property="og:image" content="https://pic3.zhimg.com/80/v2-411574e554c30da628a107c271e75fd6_1440w.jpg">
+<meta property="article:published_time" content="2021-08-22T07:08:03.000Z">
+<meta property="article:modified_time" content="2022-01-04T13:49:04.691Z">
+<meta property="article:author" content="齐雨争">
+<meta property="article:tag" content="java leetcode mysql hexo Deemo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.zhihu.com/equation?tex=%5Cfrac+%7B%5Cpartial+Q%7D%7B%5Cpartial+X%7D=%5Cfrac+%7B%5Cpartial+P%7D%7B%5Cpartial+Y%7D++">
+
+
+<link rel="canonical" href="http://example.com/2021/08/22/port%E6%A0%BC%E6%9E%97%E5%85%AC%E5%BC%8F/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2021/08/22/port%E6%A0%BC%E6%9E%97%E5%85%AC%E5%BC%8F/","path":"2021/08/22/port格林公式/","title":"格林公式"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>格林公式 | 齐雨争 / Chingmy</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">齐雨争 / Chingmy</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">穿梭时间的画面的钟，从反方向开始移动</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#DuangDuangDuang%EF%BC%81%E9%93%81%E6%A3%8D%E6%95%B2%E9%BB%91%E6%9D%BF%EF%BC%81"><span class="nav-number">1.</span> <span class="nav-text">DuangDuangDuang！铁棍敲黑板！</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E4%B8%80%E4%B8%8B%EF%BC%8C-%EF%BC%8C%E6%98%AF%E4%B8%8D%E6%98%AF%E7%AD%89%E4%BA%8E-%EF%BC%8C%E8%80%8C%E8%BF%99%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E8%B7%AF%E5%BE%84%E6%97%A0%E5%85%B3%E7%9A%84%E5%88%A4%E6%8D%AE%EF%BC%81%E6%98%AF%E4%B8%8D%E6%98%AF%E5%BE%88%E7%A5%9E%E5%A5%87%EF%BC%81%EF%BC%81%EF%BC%81"><span class="nav-number">2.</span> <span class="nav-text">计算一下，  ，是不是等于  ，而这是什么？路径无关的判据！是不是很神奇！！！</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E5%90%8E%EF%BC%8C%E5%86%8D%E6%9D%A5%E5%87%A0%E4%B8%AA%E5%8F%8D%E6%80%9D"><span class="nav-number">3.</span> <span class="nav-text">最后，再来几个反思</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%85%9C%E7%A5%9E%E9%97%AE%EF%BC%9A"><span class="nav-number">4.</span> <span class="nav-text">煜神问：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kaysen%E9%97%AE%EF%BC%9A"><span class="nav-number">5.</span> <span class="nav-text">Kaysen问：</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">齐雨争</p>
+  <div class="site-description" itemprop="description">就是一个单纯的小男孩罢了</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/22/port%E6%A0%BC%E6%9E%97%E5%85%AC%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="齐雨争">
+      <meta itemprop="description" content="就是一个单纯的小男孩罢了">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="齐雨争 / Chingmy">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          格林公式
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-08-22 15:08:03" itemprop="dateCreated datePublished" datetime="2021-08-22T15:08:03+08:00">2021-08-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-01-04 21:49:04" itemprop="dateModified" datetime="2022-01-04T21:49:04+08:00">2022-01-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">高等数学</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>众所周知，格林公式作为KO与路径无关的第二类曲线积分的杀招，是秀的。但至于<strong>为什么适用于路径无关的情况、路径无关的判据为什么是 <img src="https://www.zhihu.com/equation?tex=%5Cfrac+%7B%5Cpartial+Q%7D%7B%5Cpartial+X%7D=%5Cfrac+%7B%5Cpartial+P%7D%7B%5Cpartial+Y%7D++" alt="[公式]"> ，为什么线积分能够等效成一个二重积分</strong>。很多人一脸黑人问号。<span id="more"></span></p>
+<p><strong>煜神学长（考研数学148分天赋选手）和Kaysen学长</strong>收到了此类SOS信息，<strong>故作本文精讲格林公式的适用条件，从物理本质上吃透该知识点，达到小周天境界。</strong></p>
+<p><img src="https://pic1.zhimg.com/80/v2-9f93f53a70b68691567ff3aee9f3eb98_1440w.jpg" alt="img"></p>
+<p><strong>在讲格林公式的路径无关前，先引入一个重力场</strong>，假设在屋顶（a点）玩竹蜻蜓的大雄被妈妈喊回去写作业（b点），情况1，竹蜻蜓不好使了，大雄一屁股径直掉到地上，情况2，隔壁的静香在洗澡，害大雄拐了个弯，情况3，风来了，大雄被18级大风吹走了，绕地球转了一圈，<strong>不管大雄是哪种路径，只要a,b固定，重力这家伙对大雄做的功都是一毛一样。</strong></p>
+<p><img src="https://pic3.zhimg.com/80/v2-077e73d374f5f2bcac1f35003a79267a_1440w.jpg" alt="img"></p>
+<p>同理，<strong>在地球某一个截面的引力场中</strong>，引力均从物体指向地心，以地心为原点，做一x/y坐标系，大雄被18级大风从A点吹到B点的过程，<strong>问：引力对大雄做功多少？</strong></p>
+<p><strong>分析：</strong>该模型中，<strong>求变力在曲线上做功，即为第二类曲线积分。</strong></p>
+<p>任意k点，变化的引力 <img src="https://www.zhihu.com/equation?tex=+F=%5Ccfrac%7BGMm%7D%7Br%5E2%7D+" alt="[公式]"> ，其中 <img src="https://www.zhihu.com/equation?tex=r%5E2=x%5E2+y%5E2+" alt="[公式]"> ，立即推， <img src="https://www.zhihu.com/equation?tex=F=%5Ccfrac%7BGMm%7D%7Bx%5E2+y%5E2%7D" alt="[公式]">。</p>
+<p>引力与y轴夹角设为θ，大雄所受引力在x轴和y轴的分量，可表示为 <img src="https://www.zhihu.com/equation?tex=+Fsin%5Ctheta=F_%7BX%7D+" alt="[公式]"> ， <img src="https://www.zhihu.com/equation?tex=Fcos%5Ctheta=F_%7BY%7D" alt="[公式]"> 。</p>
+<p>引力在AB曲线段对大雄做的功，即为 <img src="https://www.zhihu.com/equation?tex=W_%7BL%7D=%5Cint_%7BL%7DFsin%5Ctheta+dx+Fcos%5Ctheta+dy" alt="[公式]">，也即是 <img src="https://www.zhihu.com/equation?tex=W_%7BL%7D=%5Cint_%7BL%7DPdx+Qdy" alt="[公式]"> 。</p>
+<p>其中， <img src="https://www.zhihu.com/equation?tex=P=Fsin%5Ctheta=%5Ccfrac%7BGMmx%7D%7B%7B%5Cleft(+x%5E2+y%5E2+%5Cright)%7D%5E%7B%5Cfrac%7B3%7D%7B2%7D%7D%7D" alt="[公式]"> ； <img src="https://www.zhihu.com/equation?tex=Q=Fcos%5Ctheta=%5Ccfrac%7BGMmy%7D%7B%7B%5Cleft(+x%5E2+y%5E2+%5Cright)%7D%5E%7B%5Cfrac%7B3%7D%7B2%7D%7D%7D" alt="[公式]"> 。（在黄色三角形中，根据勾股定理，可得出， <img src="https://www.zhihu.com/equation?tex=sin%5Ctheta=%5Cfrac%7Bx%7D%7B%5Csqrt%7Bx%5E2+y%5E2%7D%7D" alt="[公式]"> ， <img src="https://www.zhihu.com/equation?tex=cos%5Ctheta=%5Cfrac%7By%7D%7B%5Csqrt%7Bx%5E2+y%5E2%7D%7D" alt="[公式]"> ）</p>
+<h2 id="DuangDuangDuang！铁棍敲黑板！"><a href="#DuangDuangDuang！铁棍敲黑板！" class="headerlink" title="DuangDuangDuang！铁棍敲黑板！"></a>DuangDuangDuang！铁棍敲黑板！</h2><h2 id="计算一下，-，是不是等于-，而这是什么？路径无关的判据！是不是很神奇！！！"><a href="#计算一下，-，是不是等于-，而这是什么？路径无关的判据！是不是很神奇！！！" class="headerlink" title="计算一下，  ，是不是等于  ，而这是什么？路径无关的判据！是不是很神奇！！！"></a>计算一下， <img src="https://www.zhihu.com/equation?tex=%5Cfrac+%7B%5Cpartial+P%7D%7B%5Cpartial+Y%7D++" alt="[公式]"> ，是不是等于 <img src="https://www.zhihu.com/equation?tex=%5Cfrac+%7B%5Cpartial+Q%7D%7B%5Cpartial+X%7D" alt="[公式]"> ，而这是什么？路径无关的判据！是不是很神奇！！！</h2><p><strong>后面更牛逼，一元的第二类曲线积分，又是怎么能等于一个平面积分（二重积分）的呢？这在弄啥嘞！接着看线积分大变面积分物理魔术！</strong></p>
+<p>先来个常识，问你，<strong>图中的静香，色彩是连续且密不可分的么？</strong></p>
+<p><img src="https://pic1.zhimg.com/80/v2-d33207ca31f956093be6a87a4a5ab300_1440w.jpg" alt="img">积分学下的静香</p>
+<p>如果回答是，那就大意了、没有闪！<strong>在PS中放大，密不可分的静香是这样式的：</strong></p>
+<p><img src="https://pic1.zhimg.com/80/v2-bdf0fc027e36156f6c69215dd8639d90_1440w.jpg" alt="img">微分学下的静香</p>
+<p>可以看出静香圆润的头型，大大的眼睛，<strong>这些曲线，都是由小方块们连在一起，以直代曲，微观为直，宏观为曲，构造而成</strong>。而整体上国色天香的静香，也是由许许多多1像素的色块堆积而成。</p>
+<p><strong>而以直代曲，用微观的小方块去堆积表达宏观图像，也正是微分学的应用体现。</strong>带着这些常识，继续看：</p>
+<p><strong>在引力场计算变力做功时，若同一路径来回走一遭，则一来一回的功可相互抵消。</strong></p>
+<p>例如一个口字型，可以分解成一个日字型，公共边上的功，相互可消。分成田字形亦然。</p>
+<p><img src="https://pic4.zhimg.com/80/v2-18dc2d9fbb7b4c3673ff15961a28981f_1440w.jpg" alt="img"></p>
+<p><strong>既然引力在曲线上做的功，神tm难算？那么好，我们借助静香图像的讲述，把曲线与曲线围成的图形同时像素化，化作无数像素块堆积而成的平面，那么引力在曲线上沿顺时针方向（或逆时针）做的功，是否可分解成引力沿所有小方块的边顺（逆）所做的功的和？</strong></p>
+<p><strong>由于公共边的功正负相消，所以沿小方块们做的功的和，也就演变为小方块堆积图形的轮廓线所做的功，也就是以直代曲下曲线的引力功。</strong></p>
+<p><img src="https://pic4.zhimg.com/80/v2-9de83db33fce010c7aa4b0d1554600f3_1440w.png" alt="img">一段看似光滑的小曲线L</p>
+<p><img src="https://pic3.zhimg.com/80/v2-b1ca3718675bd3757a053f6029edf152_1440w.jpg" alt="img">微分视角下的曲线-本质是以直代曲</p>
+<p><img src="https://pic1.zhimg.com/80/v2-f6abecdc4f4e20502687c41fc194c5d4_1440w.jpg" alt="img">内部接壤方块消边后，留下外轮廓的折线表示曲线L</p>
+<p><strong>那，这些步骤是怎么在数学上实现的呢？</strong></p>
+<p><strong>我们把大雄对静香的爱心，其中一个像素块抽出来，四个点分别赋予坐标值：</strong></p>
+<p><img src="https://pic1.zhimg.com/80/v2-5cd78bb4c8bcd4b109537287251367e8_1440w.jpg" alt="img">爱心区域为D，单个方块区域为D1</p>
+<p><strong>对于单个正方形，引力沿四条边做的功如下：</strong></p>
+<p><img src="https://www.zhihu.com/equation?tex=W_%7BL_1%7D=%5Cint_%7Ba_1%7D%5E%7Ba_2%7DP(x,b_1)dx" alt="[公式]"> ， <img src="https://www.zhihu.com/equation?tex=W_%7BL_2%7D=%5Cint_%7Bb_1%7D%5E%7Bb_2%7DQ(a_2,y)dy" alt="[公式]"> </p>
+<p><img src="https://www.zhihu.com/equation?tex=W_%7BL_3%7D=%5Cint_%7Ba_2%7D%5E%7Ba_1%7DP(x,b_2)dx" alt="[公式]"> ， <img src="https://www.zhihu.com/equation?tex=W_%7BL_4%7D=%5Cint_%7Bb_2%7D%5E%7Bb_1%7DQ(a_1,y)dy" alt="[公式]"> </p>
+<p><strong>求和后，引力沿单个正方形做的总功为（式1）：</strong></p>
+<p><img src="https://www.zhihu.com/equation?tex=W=%5Cint_%7Ba_1%7D%5E%7Ba_2%7D%5BP(x,b_1)-P(x,b_2)%5Ddx+%5Cint_%7Bb_1%7D%5E%7Bb_2%7D%5BQ(a_2,y)-Q(a_1,y)%5Ddy" alt="[公式]"> </p>
+<p><strong>插入一个偏导数的极限表达式：</strong></p>
+<p><img src="https://www.zhihu.com/equation?tex=%5Clim_%7Bx%5Cto%7Bx_0%7D%7D+%5Cfrac%7Bf(x,y_0)-f(x_0,y_0)%7D+%7Bx-x_%7B0%7D%7D=f%27(x_%7B0%7D,y_%7B0%7D)" alt="[公式]"> </p>
+<p><strong>当 <img src="https://www.zhihu.com/equation?tex=b1-b2%5Crightarrow+%7B0%7D" alt="[公式]"> 时，在一阶偏导连续的情况下（格林公式的条件），得到式2式3：</strong></p>
+<p><img src="https://www.zhihu.com/equation?tex=P(x,b_1)-P(x,b_2)=%5Cint_%7Bb_2%7D%5E%7Bb_1%7DP%27_y(x,y)dy=%5Cint_%7Bb_2%7D%5E%7Bb_1%7D%7B%5Cfrac+%7B%5Cpartial+P%7D%7B%5Cpartial+Y%7D%7Ddy" alt="[公式]"> </p>
+<p><img src="https://www.zhihu.com/equation?tex=Q(a_2,y)-Q(a_1,y)=%5Cint_%7Ba_1%7D%5E%7Ba_2%7DQ%27_x(x,y)dy=%5Cint_%7Ba_1%7D%5E%7Ba_2%7D%7B%5Cfrac+%7B%5Cpartial+Q%7D%7B%5Cpartial+X%7D%7Ddx" alt="[公式]"> </p>
+<p><strong>将式2式3回带到式1，有式4：</strong></p>
+<p><img src="https://www.zhihu.com/equation?tex=W=%5Cint_%7Ba_1%7D%5E%7Ba_2%7D%5Cint_%7Bb_2%7D%5E%7Bb_1%7D%5Cfrac+%7B%5Cpartial+P%7D%7B%5Cpartial+Y%7Ddxdy+%5Cint_%7Ba_1%7D%5E%7Ba_2%7D%5Cint_%7Bb_1%7D%5E%7Bb_2%7D%5Cfrac+%7B%5Cpartial+Q%7D%7B%5Cpartial+X%7Ddxdy" alt="[公式]"> </p>
+<p><strong>将式4前部y的上下限互换，整体加负号，有：</strong></p>
+<p><img src="https://www.zhihu.com/equation?tex=W=%5Cint_%7Ba_1%7D%5E%7Ba_2%7D%5Cint_%7Bb_1%7D%5E%7Bb_2%7D%5B%5Cfrac+%7B%5Cpartial+Q%7D%7B%5Cpartial+X%7D-%5Cfrac+%7B%5Cpartial+P%7D%7B%5Cpartial+Y%7D%5Ddxdy=%5Ciint_%7BD_1%7D%5B%5Cfrac+%7B%5Cpartial+Q%7D%7B%5Cpartial+X%7D-%5Cfrac+%7B%5Cpartial+P%7D%7B%5Cpartial+Y%7D%5Dd%5Csigma" alt="[公式]"> </p>
+<p><strong>此时，引力对单个小正方形做的功已求出，我们想要求爱心曲线上的总功，就把无数个小正方形的功累加即可。在积分上表示为：</strong></p>
+<p><img src="https://www.zhihu.com/equation?tex=%5Coint_%7BL%7DPdx+Qdy=%5Ciint_D%5B%5Cfrac+%7B%5Cpartial+Q%7D%7B%5Cpartial+X%7D-%5Cfrac+%7B%5Cpartial+P%7D%7B%5Cpartial+Y%7D%5Dd%5Csigma" alt="[公式]"> </p>
+<p><strong>于是，格林公式得证！一元的线积分神奇地变成了二重积分！！！</strong></p>
+<p>此时，再来首尾呼应下，<strong>路径无关为何判据是</strong> <img src="https://www.zhihu.com/equation?tex=%5Cfrac+%7B%5Cpartial+Q%7D%7B%5Cpartial+X%7D=%5Cfrac+%7B%5Cpartial+P%7D%7B%5Cpartial+Y%7D+" alt="[公式]"> </p>
+<p><strong>变化的引力做功，只与起点和终点相关，那么任意画曲线，曲流拐弯随便拐，只要是从A到B再回到A，引力做功均为0！</strong>也就是<strong>任意一个面积分，都为0，那么，只有一种可能，被积函数值恒为0。这也就是为什么路径无关，要满足</strong> <img src="https://www.zhihu.com/equation?tex=%5Cfrac+%7B%5Cpartial+Q%7D%7B%5Cpartial+X%7D=%5Cfrac+%7B%5Cpartial+P%7D%7B%5Cpartial+Y%7D+" alt="[公式]"> </p>
+<p><img src="https://pic3.zhimg.com/80/v2-411574e554c30da628a107c271e75fd6_1440w.jpg" alt="img"></p>
+<h2 id="最后，再来几个反思"><a href="#最后，再来几个反思" class="headerlink" title="最后，再来几个反思"></a><strong>最后，再来几个反思</strong></h2><h2 id="煜神问："><a href="#煜神问：" class="headerlink" title="煜神问："></a><strong>煜神问：</strong></h2><p>1，格林公式处理第二类曲线积分，<strong>路径无关怎么理解</strong>？再回顾一下本文内容。</p>
+<p>2，使用格林公式时<strong>曲线为什么要封闭？不封闭为什么要补线？补线为什么要补与坐标轴平行的线？</strong></p>
+<h2 id="Kaysen问："><a href="#Kaysen问：" class="headerlink" title="Kaysen问："></a><strong>Kaysen问：</strong></h2><p>3，在闭区域内<strong>存在无定义点时，为什么要挖洞？为什么挖完洞，无定义点就消失了？</strong></p>
+<p>4，对问题3进行延伸，既然格林公式能把线积分转化成二重积分，<strong>闭曲线内的区域用无数个小方块分割，小方块是可以cover无定义点的，那么只需要计算小方块四条边上的功，不就完美把无定义点的干扰排除了么？那为什么还需要挖洞呢？</strong></p>
+<p><strong>希望本文能够启发大家的数学反思，针对数学考点的反思步骤为：</strong></p>
+<p><strong>运用公式的本质是？有哪些条件？为什么需要这些条件？条件为什么成立？使用这些条件时有哪些技巧？一步步深挖，将数学彻底建立在反思之上，才能够达到深度理解，解题才能才能得心应手！加油！</strong></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/08/21/port%E2%80%9C%E5%AD%97%E4%BD%93%E2%80%9D/" rel="prev" title="主题字体的修改">
+                  <i class="fa fa-chevron-left"></i> 主题字体的修改
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/08/22/port%E2%80%9C%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%85%A8%E5%BE%AE%E5%88%86%E2%80%9D/" rel="next" title="深入理解全微分">
+                  深入理解全微分 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">齐雨争</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
